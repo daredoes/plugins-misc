@@ -15,6 +15,7 @@ insults = [
 
 domain = "magfe.st"
 responses = []
+noises = []
 
 orders = {"66":"It shall be done, my liege.", "delta alfa romeo echo":"butts.",
           "overtaker": "Soon I will consume MAGBot whole."}
@@ -48,6 +49,16 @@ def recur(trigger, response, perm, halp):
             else:
                 message.send(response())
 
+def ears(trigger, response, perm, halp):
+    @listen_to(trigger, re.IGNORECASE, halp)
+    #@respond_to(trigger, re.IGNORECASE, halp)
+    def basic_reply(message):
+        if is_approved(message, perm):
+            if isinstance(response, str):
+                message.send(response)
+            else:
+                message.send(response())
+
 
 responses.append(reply_to_tuple("\\bbad\\b", "I'm sorry! Please forgive me!", "any"))
 responses.append(reply_to_tuple("\\bbehave\\b", "I will do my *best*!", "any"))
@@ -57,10 +68,12 @@ responses.append(reply_to_tuple('\\bpet\\b', "What a _kind_ gesture.", "any"))
 responses.append(reply_to_tuple('\\bbite\\b', "*BITES BACK!*", "any"))
 responses.append(reply_to_tuple('\\bactivate skynet\\b', "_Skynet_ *ACTIVATED*", "any"))
 responses.append(reply_to_tuple('\\blove me\\b',"How about... *no.*", "any"))
-responses.append(reply_to_tuple('\\b420\\b', "Drugs are *bad*. Stay in school.", "any"))
+noises.append(reply_to_tuple('\\b420\\b', "Drugs are *bad*. Stay in school.", "any"))
 
 for x in responses:
     recur(x[0], x[1], x[2], x[3])
+for x in noises:
+    ears(x[0], x[1], x[2], x[3])
 
 
 woagh = '\\bwo+?a+?g+?h+?\\b'
