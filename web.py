@@ -1,7 +1,7 @@
 from slackbot.bot import respond_to
 from slackbot.bot import listen_to
 from slackbot.utils import download_file, create_tmp_file, till_white, till_end
-from slackbot.plugins.admin.perms import is_approved
+from plugins.admin.perms import is_approved
 import urllib
 import urllib2
 import re

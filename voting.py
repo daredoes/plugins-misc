@@ -3,7 +3,7 @@ from slackbot.bot import listen_to
 from slackbot.globals import attributes
 from slackbot.utils import download_file, create_tmp_file, till_white, till_end
 import re
-from slackbot.plugins.admin.perms import is_approved
+from plugins.admin.perms import is_approved
 
 try:
     db = attributes['db']
