@@ -21,7 +21,9 @@ rem = "\\bremember\\b %s \\bis\\b %s" % (till_white, till_end)
 #@listen_to(rem, re.IGNORECASE, rem_help)
 @respond_to(rem, re.IGNORECASE)
 def remember(message, key, note):
+    """
     remember (KEY) is (VALUE) - sets the key to whatever is typed after 'is '
+    """
     if is_approved(message, "any"):
         temp = note.split(" ")
         temp2 = ""

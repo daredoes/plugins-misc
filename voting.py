@@ -50,7 +50,7 @@ def start_vote(message, title, options):
 
 vote_string = "\\bstart vote once\\b %s %s" % (till_white, till_end)
 #@listen_to(vote_string, re.IGNORECASE, vote_string_help)
-@respond_to(vote_string, re.IGNORECASE, vote_string_help)
+@respond_to(vote_string, re.IGNORECASE)
 def start_vote(message, once, title, options):
     """
     start vote once (KEY) (OPTIONS) - Users Can Only Vote Once - Options must be comma-separated. Example: 1,2,3
