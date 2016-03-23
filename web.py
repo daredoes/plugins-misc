@@ -28,8 +28,8 @@ m_link = "\\bmake link\\b %s %s" % (till_white, till_end)
 #@listen_to(m_link, re.IGNORECASE, m_link_help)
 def make_link(message, key, url):
     """
-    make link (KEY) (URL) - makes a shortlink at %s with KEY
-    """ % domain
+    make link (KEY) (URL) - makes a shortlink at the current domain with KEY
+    """
     if is_approved(message, 'web'):
         url = url.strip('<> ')
         try:
@@ -44,8 +44,8 @@ g_link = "\\bgen link\\b (.*)"
 #@listen_to(g_link, re.IGNORECASE, g_link_help)
 def gen_link(message, url):
     """
-    gen link (URL) - makes a shortlink at %s that has a randomly generated key
-    """ % domain
+    gen link (URL) - makes a shortlink at the current domain that has a randomly generated key
+    """
     if is_approved(message, 'web'):
         url = url.strip('<> ')
         try:
