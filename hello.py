@@ -41,8 +41,9 @@ def user_dict(username, id, permissions=""):
 
 def recur(trigger, response, perm, halp):
     #@listen_to(trigger, re.IGNORECASE, halp)
-    @respond_to(trigger, re.IGNORECASE, halp)
+    @respond_to(trigger, re.IGNORECASE)
     def basic_reply(message):
+        """%s""" % halp
         if is_approved(message, perm):
             if isinstance(response, str):
                 message.send(response)
@@ -50,9 +51,10 @@ def recur(trigger, response, perm, halp):
                 message.send(response())
 
 def ears(trigger, response, perm, halp):
-    @listen_to(trigger, re.IGNORECASE, halp)
+    @listen_to(trigger, re.IGNORECASE)
     #@respond_to(trigger, re.IGNORECASE, halp)
     def basic_reply(message):
+        """%s""" % halp
         if is_approved(message, perm):
             if isinstance(response, str):
                 message.send(response)
@@ -77,18 +79,24 @@ for x in noises:
 
 
 woagh = '\\bwo+?a+?g+?h+?\\b'
-@listen_to(woagh, re.IGNORECASE, halp="wo(repeatable)a(repeatable)g(repeatable)h(repeatable)")
-@respond_to(woagh, re.IGNORECASE, halp="wo(repeatable)a(repeatable)g(repeatable)h(repeatable)")
+@listen_to(woagh, re.IGNORECASE)
+@respond_to(woagh, re.IGNORECASE)
 def woooaaagh(message):
+    """
+    wo(repeatable)a(repeatable)g(repeatable)h(repeatable)
+    """
     if is_approved(message, "any"):
         message.react("colossus")
         message.send("*WOAAAAAAAGGHHHH!*\nhttps://pbs.twimg.com/media/B8JvTeMIIAAbXYA.jpg:large")
 
 help_str = '\\bhelp\\b'
 command_str= '\\bcommands\\b'
-@listen_to(help_str, re.IGNORECASE, "help - pulls up the available commands")
-@listen_to(command_str, re.IGNORECASE, "commands - pulls up the available commands")
+@listen_to(help_str, re.IGNORECASE)
+@listen_to(command_str, re.IGNORECASE)
 def help_commands2(message):
+    """
+    help/commands - pulls up the available commands
+    """
     if is_approved(message, "any"):
         coms = PluginsManager.commands['listen_to']
         default_reply = [
@@ -101,9 +109,12 @@ def help_commands2(message):
         default_reply = '\n'.join(to_utf8(default_reply))
         message.upload_snippet(str(default_reply), "Commands")
 
-@respond_to(help_str, re.IGNORECASE, "help - pulls up the available commands")
-@respond_to(command_str, re.IGNORECASE, "commands - pulls up the available commands")
+@respond_to(help_str, re.IGNORECASE)
+@respond_to(command_str, re.IGNORECASE)
 def help_commands(message):
+    """
+    help/commands - pulls up the available commands
+    """
     if is_approved(message, "any"):
         coms = PluginsManager.commands['respond_to']
         default_reply = [
@@ -118,9 +129,12 @@ def help_commands(message):
 
 
 order_sent = "\\bexecute order\\b (.*$)"
-@listen_to(order_sent, re.IGNORECASE, halp="Execute Order (command)")
-@respond_to(order_sent, re.IGNORECASE, halp="Execute Order (command)")
+@listen_to(order_sent, re.IGNORECASE)
+@respond_to(order_sent, re.IGNORECASE)
 def execute_orders(message, order):
+    """
+    Execute Order (command)
+    """
     if is_approved(message, "any"):
         if order in orders.keys():
             if isinstance(orders[order], str):

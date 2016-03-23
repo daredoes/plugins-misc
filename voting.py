@@ -31,10 +31,12 @@ def delete_votes(message):
         message.send("All Votes Deleted")
 
 vote_string = "\\bstart vote\\b %s %s" % (till_white, till_end)
-vote_string_help = "start vote (KEY) (OPTIONS) - Options must be comma-separated. Example: 1,2,3"
 #@listen_to(vote_string, re.IGNORECASE, vote_string_help)
-@respond_to(vote_string, re.IGNORECASE, vote_string_help)
+@respond_to(vote_string, re.IGNORECASE)
 def start_vote(message, title, options):
+    """
+    start vote (KEY) (OPTIONS) - Options must be comma-separated. Example: 1,2,3
+    """
     if is_approved(message, 'any'):
         vote_start = "Vote \"%s\" started.\nPlease Vote with 'vote %s (option)'\n" % (title, title)
         optss = ""
@@ -47,10 +49,12 @@ def start_vote(message, title, options):
             message.upload_snippet(optss, "Options")
 
 vote_string = "\\bstart vote once\\b %s %s" % (till_white, till_end)
-vote_string_help = "start vote once (KEY) (OPTIONS) - Users Can Only Vote Once - Options must be comma-separated. Example: 1,2,3"
 #@listen_to(vote_string, re.IGNORECASE, vote_string_help)
 @respond_to(vote_string, re.IGNORECASE, vote_string_help)
 def start_vote(message, once, title, options):
+    """
+    start vote once (KEY) (OPTIONS) - Users Can Only Vote Once - Options must be comma-separated. Example: 1,2,3
+    """
     if is_approved(message, 'any'):
         vote_start = "Vote \"%s\" started.\nPlease Vote with 'vote %s (option)'\n" % (title, title)
         optss = ""
@@ -63,10 +67,12 @@ def start_vote(message, once, title, options):
             message.upload_snippet(optss, "Options")
 
 vote_end = "\\bend vote\\b %s" % till_white
-vote_end_help = "End Vote (KEY) - Ends Vote KEY, Can Only Be Used by Vote-Creator"
 #@listen_to(vote_end, re.IGNORECASE, vote_end_help)
-@respond_to(vote_end, re.IGNORECASE, vote_end_help)
+@respond_to(vote_end, re.IGNORECASE)
 def end_vote(message, title):
+    """
+    End Vote (KEY) - Ends Vote KEY, Can Only Be Used by Vote-Creator
+    """
     if is_approved(message, 'any'):
         if db.votes.count({"title":title}) != 0:
             thing = db.votes.find({"title":title})
@@ -81,10 +87,12 @@ def end_vote(message, title):
 
 
 vote_option = "\\badd vote\\b %s %s" % (till_white, till_end)
-vote_option_help = "add vote (KEY) (VALUE) - Votes for VALUE in Vote:KEY"
 #@listen_to(vote_option, re.IGNORECASE, vote_option_help)
-@respond_to(vote_option, re.IGNORECASE, vote_option_help)
+@respond_to(vote_option, re.IGNORECASE)
 def add_vote_option(message, title, option):
+    """
+    add vote (KEY) (VALUE) - Votes for VALUE in Vote:KEY
+    """
     if is_approved(message, 'any'):
         if db.votes.count({"title":title}) != 0:
             thing = db.votes.find({"title":title})
@@ -132,12 +140,14 @@ def add_vote(message, title, vote):
 
 vote_list = "\\blist votes\\b %s" % (till_white)
 vote_list2 = "\\blist vote\\b %s" % (till_white)
-vote_list_help = "list vote[s] (KEY) - Lists all entered votes for Vote-KEY"
 #@listen_to(vote_list2, re.IGNORECASE, vote_list_help)
-@respond_to(vote_list2, re.IGNORECASE, vote_list_help)
+@respond_to(vote_list2, re.IGNORECASE)
 #@listen_to(vote_list, re.IGNORECASE, vote_list_help)
-@respond_to(vote_list, re.IGNORECASE, vote_list_help)
+@respond_to(vote_list, re.IGNORECASE)
 def list_votes(message, title):
+    """
+    list vote[s] (KEY) - Lists all entered votes for Vote-KEY
+    """
     temp = ""
     if db.votes.count({"title": title}) != 0:
         thing = db.votes.find({"title": title})
@@ -149,10 +159,12 @@ def list_votes(message, title):
         message.send("Vote does not exist")
 
 vote_list = "\\blist votes-info\\b %s" % (till_white)
-vote_list_help = "list votes-info (KEY) - lists the detailed info with KEY"
 #@listen_to(vote_list, re.IGNORECASE, vote_list_help)
-@respond_to(vote_list, re.IGNORECASE, vote_list_help)
+@respond_to(vote_list, re.IGNORECASE)
 def list_votes_info(message, title):
+    """
+    list votes-info (KEY) - lists the detailed info with KEY
+    """
     if is_approved(message, "admin"):
         temp = ""
         if db.votes.count({"title": title}) != 0:

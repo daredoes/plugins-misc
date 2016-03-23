@@ -24,10 +24,12 @@ def web_new_link(key, url):
 
 
 m_link = "\\bmake link\\b %s %s" % (till_white, till_end)
-m_link_help = "make link (KEY) (URL) - makes a shortlink at %s with KEY" % domain
-@respond_to(m_link, re.IGNORECASE, m_link_help)
+@respond_to(m_link, re.IGNORECASE)
 #@listen_to(m_link, re.IGNORECASE, m_link_help)
 def make_link(message, key, url):
+    """
+    make link (KEY) (URL) - makes a shortlink at %s with KEY
+    """ % domain
     if is_approved(message, 'web'):
         url = url.strip('<> ')
         try:
@@ -38,10 +40,12 @@ def make_link(message, key, url):
             message.send("Bad URL")
 
 g_link = "\\bgen link\\b (.*)"
-g_link_help = "gen link (URL) - makes a shortlink at %s that has a randomly generated key" % domain
-@respond_to(g_link, re.IGNORECASE, g_link_help)
+@respond_to(g_link, re.IGNORECASE)
 #@listen_to(g_link, re.IGNORECASE, g_link_help)
 def gen_link(message, url):
+    """
+    gen link (URL) - makes a shortlink at %s that has a randomly generated key
+    """ % domain
     if is_approved(message, 'web'):
         url = url.strip('<> ')
         try:
@@ -52,10 +56,12 @@ def gen_link(message, url):
             message.send("Bad URL")
 
 master = "\\bmaster\\b"
-master_help = "master - returns list of all current shortlinks available at %s" % domain
-@respond_to(master, re.IGNORECASE, master_help)
+@respond_to(master, re.IGNORECASE)
 #@listen_to(master, re.IGNORECASE, master_help)
 def master_links(message):
+    """
+    master - returns list of all current shortlinks available at %s
+    """  % domain
     if is_approved(message, 'any'):
         try:
             attempt = urllib2.urlopen("http://%s/master" % (domain))

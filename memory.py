@@ -18,10 +18,10 @@ def memory_dict(term, thought):
     return {"key":term, "note":thought}
 
 rem = "\\bremember\\b %s \\bis\\b %s" % (till_white, till_end)
-rem_help = "remember (KEY) is (VALUE) - sets the key to whatever is typed after 'is '"
 #@listen_to(rem, re.IGNORECASE, rem_help)
-@respond_to(rem, re.IGNORECASE, rem_help)
+@respond_to(rem, re.IGNORECASE)
 def remember(message, key, note):
+    remember (KEY) is (VALUE) - sets the key to whatever is typed after 'is '
     if is_approved(message, "any"):
         temp = note.split(" ")
         temp2 = ""
@@ -38,10 +38,12 @@ def remember(message, key, note):
             message.send("I already know something about %s" % key)
 
 wha = "\\bwhat is\\b %s" % (till_white)
-wha_help = "what is (KEY) - remembers the thing associated with KEY"
 #@listen_to(wha, re.IGNORECASE, wha_help)
-@respond_to(wha, re.IGNORECASE, wha_help)
+@respond_to(wha, re.IGNORECASE)
 def what(message, key):
+    """
+    what is (KEY) - remembers the thing associated with KEY
+    """
     if is_approved(message, "any"):
         if db.mem.count({"key":key}) != 0:
             thing = db.mem.find({"key":key})
@@ -51,10 +53,12 @@ def what(message, key):
             message.send("I don't know what %s is" % key)
 
 fer = '\\bforget what %s is' % till_white
-fer_help = "forget what  (KEY) is - forgets the thing associated with KEY"
 #@listen_to(fer, re.IGNORECASE)
 @respond_to(fer, re.IGNORECASE)
 def forget(message, key):
+    """
+    forget what  (KEY) is - forgets the thing associated with KEY
+    """
     if is_approved(message, "admin"):
         if db.mem.count({"key":key}) != 0:
             db.mem.delete_many({"key": key})
