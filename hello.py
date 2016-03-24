@@ -102,7 +102,7 @@ def help_commands2(message):
         default_reply = [
             'You can ask me one of the following questions:\n',
         ]
-        default_reply += ['{0} {1}'.format(p[1]
+        default_reply += ['{0} {1}'.format(p
                                                    , v.__doc__ or "")
                           for p, v in iteritems(coms)]
 
@@ -120,7 +120,7 @@ def help_commands(message):
         default_reply = [
             'You can ask me one of the following questions:\n',
         ]
-        default_reply += ['{0} {1}'.format(p[1]
+        default_reply += ['{0} {1}'.format(p
                                                    , v.__doc__ or "")
                           for p, v in iteritems(coms)]
 
