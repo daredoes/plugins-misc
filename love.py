@@ -40,7 +40,7 @@ def who_could_love(message, the_love):
                 temp = ""
                 for lover in x['lovers'].split(","):
                     temp += "%s *loves* %s\n" % (lover, the_love)
-                message.send(temp)
+                message.upload_snippet(temp, "Lovers of  %s" % the_love)
         else:
             message.send("Nobody loves %s..." % the_love)
 
