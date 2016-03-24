@@ -89,45 +89,6 @@ def woooaaagh(message):
         message.react("colossus")
         message.send("*WOAAAAAAAGGHHHH!*\nhttps://pbs.twimg.com/media/B8JvTeMIIAAbXYA.jpg:large")
 
-help_str = '\\bhelp\\b'
-command_str= '\\bcommands\\b'
-@listen_to(help_str, re.IGNORECASE)
-@listen_to(command_str, re.IGNORECASE)
-def help_commands2(message):
-    """
-    help/commands - pulls up the available commands
-    """
-    if is_approved(message, "any"):
-        coms = PluginsManager.commands['listen_to']
-        default_reply = [
-            'You can ask me one of the following questions:\n',
-        ]
-        default_reply += ['{0} {1}'.format(p
-                                                   , v.__doc__ or "")
-                          for p, v in iteritems(coms)]
-
-        default_reply = '\n'.join(to_utf8(default_reply))
-        message.upload_snippet(str(default_reply), "Commands")
-
-@respond_to(help_str, re.IGNORECASE)
-@respond_to(command_str, re.IGNORECASE)
-def help_commands(message):
-    """
-    help/commands - pulls up the available commands
-    """
-    if is_approved(message, "any"):
-        coms = PluginsManager.commands['respond_to']
-        default_reply = [
-            'You can ask me one of the following questions:\n',
-        ]
-        default_reply += ['{0} {1}'.format(p
-                                                   , v.__doc__ or "")
-                          for p, v in iteritems(coms)]
-
-        default_reply = '\n'.join(to_utf8(default_reply))
-        message.upload_snippet(str(default_reply), "Commands")
-
-
 order_sent = "\\bexecute order\\b (.*$)"
 @listen_to(order_sent, re.IGNORECASE)
 @respond_to(order_sent, re.IGNORECASE)
