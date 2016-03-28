@@ -34,9 +34,7 @@ vote_string = "\\bstart vote\\b %s %s" % (till_white, till_end)
 #@listen_to(vote_string, re.IGNORECASE, vote_string_help)
 @respond_to(vote_string, re.IGNORECASE)
 def start_vote(message, title, options):
-    """
-    start vote (KEY) (OPTIONS) - Options must be comma-separated. Example: 1,2,3
-    """
+    """start vote (KEY) (OPTIONS) - Options must be comma-separated. Example: 1,2,3"""
     if is_approved(message, 'any'):
         vote_start = "Vote \"%s\" started.\nPlease Vote with 'vote %s (option)'\n" % (title, title)
         optss = ""
@@ -52,9 +50,7 @@ vote_string = "\\bstart vote once\\b %s %s" % (till_white, till_end)
 #@listen_to(vote_string, re.IGNORECASE, vote_string_help)
 @respond_to(vote_string, re.IGNORECASE)
 def start_vote(message, once, title, options):
-    """
-    start vote once (KEY) (OPTIONS) - Users Can Only Vote Once - Options must be comma-separated. Example: 1,2,3
-    """
+    """start vote once (KEY) (OPTIONS) - Users Can Only Vote Once - Options must be comma-separated. Example: 1,2,3"""
     if is_approved(message, 'any'):
         vote_start = "Vote \"%s\" started.\nPlease Vote with 'vote %s (option)'\n" % (title, title)
         optss = ""
@@ -70,9 +66,7 @@ vote_end = "\\bend vote\\b %s" % till_white
 #@listen_to(vote_end, re.IGNORECASE, vote_end_help)
 @respond_to(vote_end, re.IGNORECASE)
 def end_vote(message, title):
-    """
-    End Vote (KEY) - Ends Vote KEY, Can Only Be Used by Vote-Creator
-    """
+    """End Vote (KEY) - Ends Vote KEY, Can Only Be Used by Vote-Creator"""
     if is_approved(message, 'any'):
         if db.votes.count({"title":title}) != 0:
             thing = db.votes.find({"title":title})
@@ -90,9 +84,7 @@ vote_option = "\\badd vote\\b %s %s" % (till_white, till_end)
 #@listen_to(vote_option, re.IGNORECASE, vote_option_help)
 @respond_to(vote_option, re.IGNORECASE)
 def add_vote_option(message, title, option):
-    """
-    add vote (KEY) (VALUE) - Votes for VALUE in Vote:KEY
-    """
+    """add vote (KEY) (VALUE) - Votes for VALUE in Vote:KEY"""
     if is_approved(message, 'any'):
         if db.votes.count({"title":title}) != 0:
             thing = db.votes.find({"title":title})
@@ -145,9 +137,7 @@ vote_list2 = "\\blist vote\\b %s" % (till_white)
 #@listen_to(vote_list, re.IGNORECASE, vote_list_help)
 @respond_to(vote_list, re.IGNORECASE)
 def list_votes(message, title):
-    """
-    list vote[s] (KEY) - Lists all entered votes for Vote-KEY
-    """
+    """list vote[s] (KEY) - Lists all entered votes for Vote-KEY"""
     temp = ""
     if db.votes.count({"title": title}) != 0:
         thing = db.votes.find({"title": title})
@@ -162,9 +152,7 @@ vote_list = "\\blist votes-info\\b %s" % (till_white)
 #@listen_to(vote_list, re.IGNORECASE, vote_list_help)
 @respond_to(vote_list, re.IGNORECASE)
 def list_votes_info(message, title):
-    """
-    list votes-info (KEY) - lists the detailed info with KEY
-    """
+    """list votes-info (KEY) - lists the detailed info with KEY"""
     if is_approved(message, "admin"):
         temp = ""
         if db.votes.count({"title": title}) != 0:

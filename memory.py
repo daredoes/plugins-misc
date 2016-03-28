@@ -21,9 +21,7 @@ rem = "\\bremember\\b %s \\bis\\b %s" % (till_white, till_end)
 #@listen_to(rem, re.IGNORECASE, rem_help)
 @respond_to(rem, re.IGNORECASE)
 def remember(message, key, note):
-    """
-    remember (KEY) is (VALUE) - sets the key to whatever is typed after 'is '
-    """
+    """remember (KEY) is (VALUE) - sets the key to whatever is typed after 'is '"""
     if is_approved(message, "any"):
         temp = note.split(" ")
         temp2 = ""
@@ -43,9 +41,7 @@ wha = "\\bwhat is\\b %s" % (till_white)
 #@listen_to(wha, re.IGNORECASE, wha_help)
 @respond_to(wha, re.IGNORECASE)
 def what(message, key):
-    """
-    what is (KEY) - remembers the thing associated with KEY
-    """
+    """what is (KEY) - remembers the thing associated with KEY"""
     if is_approved(message, "any"):
         if db.mem.count({"key":key}) != 0:
             thing = db.mem.find({"key":key})
@@ -58,9 +54,7 @@ fer = '\\bforget what %s is' % till_white
 #@listen_to(fer, re.IGNORECASE)
 @respond_to(fer, re.IGNORECASE)
 def forget(message, key):
-    """
-    forget what  (KEY) is - forgets the thing associated with KEY
-    """
+    """forget what  (KEY) is - forgets the thing associated with KEY"""
     if is_approved(message, "admin"):
         if db.mem.count({"key":key}) != 0:
             db.mem.delete_many({"key": key})
