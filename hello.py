@@ -78,15 +78,6 @@ for x in noises:
     ears(x[0], x[1], x[2], x[3])
 
 
-woagh = '\\bwo+?a+?g+?h+?\\b'
-@listen_to(woagh, re.IGNORECASE)
-@respond_to(woagh, re.IGNORECASE)
-def woooaaagh(message):
-    """wo(repeatable)a(repeatable)g(repeatable)h(repeatable)"""
-    if is_approved(message, "any"):
-        message.react("colossus")
-        message.send("*WOAAAAAAAGGHHHH!*\nhttps://pbs.twimg.com/media/B8JvTeMIIAAbXYA.jpg:large")
-
 order_sent = "\\bexecute order\\b (.*$)"
 @listen_to(order_sent, re.IGNORECASE)
 @respond_to(order_sent, re.IGNORECASE)
