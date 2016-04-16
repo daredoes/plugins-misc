@@ -12,7 +12,7 @@ except KeyError:
     db = None
 
 
-@respond_to("define %s" % till_end)
+@respond_to("define %s" % till_end, re.IGNORECASE)
 def urban_response(message, term):
     if is_approved(message, "any"):
         terms = urbandict.define(term)
